@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Completed Games Catalog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .console-section {
+      margin-bottom: 30px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      cursor: pointer;
+      background-color: #eee;
+    }
+
+    .section-header img.logo {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .section-header .title {
+      display: flex;
+      align-items: center;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .chevron {
+      font-size: 1.5em;
+      transition: transform 0.3s ease;
+    }
+
+    .collapsed .chevron {
+      transform: rotate(180deg);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .image-grid img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Responsive grid */
+    @media (min-width: 768px) {
+      .image-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Completed Games Catalog</h1>
+
+  <div class="console-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="title">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Nintendo_Switch_Logo.svg" alt="Switch Logo">
+        Nintendo Switch
+      </div>
+      <div class="chevron">⬆️</div>
+    </div>
+    <div class="image-grid">
+      <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Animal_Crossing_New_Horizons.jpg" alt="Animal Crossing">
+      <img src="https://upload.wikimedia.org/wikipedia/en/6/6e/Super_Mario_Odyssey.jpg" alt="Mario Odyssey">
+      <!-- Add more Switch games -->
+    </div>
+  </div>
+
+  <div class="console-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="title">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/8/84/Playstation_logo_colour.svg" alt="PS Logo">
+        PlayStation 5
+      </div>
+      <div class="chevron">⬆️</div>
+    </div>
+    <div class="image-grid">
+      <img src="https://upload.wikimedia.org/wikipedia/en/2/2f/Horizon_Forbidden_West_cover_art.jpg" alt="Horizon Forbidden West">
+      <img src="https://upload.wikimedia.org/wikipedia/en/7/7b/Spider-Man_Miles_Morales_cover_art.jpg" alt="Spider-Man: Miles Morales">
+      <!-- Add more PS5 games -->
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(header) {
+      const section = header.parentElement;
+      const grid = section.querySelector('.image-grid');
+      const chevron = header.querySelector('.chevron');
+      const isCollapsed = grid.style.display === 'none';
+
+      grid.style.display = isCollapsed ? 'grid' : 'none';
+      section.classList.toggle('collapsed', !isCollapsed);
+    }
+
+    // Optional: collapse all sections by default
+    document.querySelectorAll('.console-section .image-grid').forEach(grid => grid.style.display = 'none');
+    document.querySelectorAll('.console-section').forEach(section => section.classList.add('collapsed'));
+  </script>
+
+</body>
+</html>
