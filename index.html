@@ -1,21 +1,148 @@
-<script>
-  function toggleSection(header) {
-    const section = header.parentElement;
-    const grid = section.querySelector('.image-grid');
-    const isCollapsed = grid.style.display === 'none';
-    grid.style.display = isCollapsed ? 'grid' : 'none';
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Games</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
 
-  function sortGames() {
-    const sections = document.querySelectorAll('.console-section');
-    sections.forEach(section => {
+    body {
+      font-family: "Michroma", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #222;
+    }
+
+    .console-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      margin-bottom: 30px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background-color: #fafafa;
+      border-bottom: 1px solid #e0e0e0;
+      cursor: pointer;
+    }
+
+    .section-header:hover {
+      background-color: #f3f3f3;
+    }
+
+    .section-header .title {
+      display: flex;
+      align-items: center;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .section-header img.logo {
+      height: 36px;
+      margin-right: 12px;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .image-grid img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .image-grid img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    @media (min-width: 768px) {
+      .image-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 767px) {
+      .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Games</h1>
+
+  <div class="console-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="title">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Game_Boy_Advance_logo.svg/2880px-Game_Boy_Advance_logo.svg.png" alt="GBA Logo">
+        Game Boy Advance
+      </div>
+    </div>
+    <div class="image-grid">
+      <img src="https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20FireRed%20Version%20(USA,%20Europe).png" alt="Pokemon FireRed">
+      <img src="https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20Emerald%20Version%20(USA,%20Europe).png" alt="Pokemon Emerald">
+    </div>
+  </div>
+
+  <div class="console-section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="title">
+        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Nintendo_DS_Logo.svg" alt="DS Logo">
+        Nintendo DS
+      </div>
+    </div>
+    <div class="image-grid">
+      <img src="https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Pokemon%20-%20Platinum%20Version%20(Europe).png" alt="Pokemon Platinum">
+    </div>
+  </div>
+
+  <script>
+    function toggleSection(header) {
+      const section = header.parentElement;
       const grid = section.querySelector('.image-grid');
-      const images = Array.from(grid.querySelectorAll('img'));
-      images.sort((a, b) => a.alt.localeCompare(b.alt));
-      grid.innerHTML = '';
-      images.forEach(img => grid.appendChild(img));
-    });
-  }
+      const isCollapsed = grid.style.display === 'none';
+      grid.style.display = isCollapsed ? 'grid' : 'none';
+    }
 
-  window.addEventListener('DOMContentLoaded', sortGames);
-</script>
+    function sortGames() {
+      const sections = document.querySelectorAll('.console-section');
+      sections.forEach(section => {
+        const grid = section.querySelector('.image-grid');
+        const images = Array.from(grid.querySelectorAll('img'));
+
+        images.sort((a, b) => a.alt.localeCompare(b.alt));
+
+        grid.innerHTML = '';
+        images.forEach(img => grid.appendChild(img));
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', sortGames);
+  </script>
+
+</body>
+</html>
